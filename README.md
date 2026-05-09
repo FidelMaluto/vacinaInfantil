@@ -8,7 +8,8 @@ O sistema permitirá o cadastro de pais e filhos.
 <img width="1336" height="602" alt="vaci01" src="https://github.com/user-attachments/assets/089793e8-f20f-4c71-9f4d-2e95d833f3b4" />
 O sistema terá uma simples e interativa página pra fácil uso.
 
-<img width="1336" height="602" alt="vaci01" src="https://github.com/user-attachments/assets/8f9eb37b-60f6-4d1b-bbca-9cde2baaec00" />
+<img width="1334" height="594" alt="vaci02" src="https://github.com/user-attachments/assets/28b21243-54f6-4e76-bbef-847d8b6b81b2" />
+
 Com dashboard que irá permitir o usuário ver o total dos dados cadastrados e o nível de responsabilidade do controlo certo das vacinas de todas as crianças cadastradas!
 
 <img width="1340" height="605" alt="vaci03" src="https://github.com/user-attachments/assets/3055e713-e9ff-45fa-949c-e8376e083415" />
