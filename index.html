@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vacina-Infantil</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+
+    <div class="login-page" id="loginPage">
+
+        <div class="login-box">
+
+            <img src="img/login.png" class="logo" />
+
+            <h1>Vacina-Infantíl</h1>
+
+            <p>
+                Sistema de Controle de Vacinação Infantil
+            </p>
+
+            <input type="email" id="email" placeholder="Digite seu email" />
+
+            <input type="password" id="senha" placeholder="Digite sua senha" />
+
+            <button onclick="entrar()">
+                Entrar no Sistema
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SISTEMA -->
+
+    <div class="sistema hidden" id="sistema">
+
+        <!-- NAVBAR -->
+
+        <nav>
+            <h2>💉 VacinaKids</h2>
+
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#vacinas">Vacinas</a></li>
+                <li><a href="#notificacoes">Notificações</a></li>
+            </ul>
+        </nav>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-text">
+                <h1>
+                    Proteja o Futuro das Crianças
+                </h1>
+
+                <p>
+                    Plataforma inteligente para acompanhamento de vacinação
+                    infantil dos 0 aos 5 anos.
+                </p>
+
+                <button>
+                    Ver Calendário Vacinal
+                </button>
+            </div>
+
+            <img src="img/principal.png" />
+
+        </section>
+
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard" class="dashboard">
+
+            <h2 class="title">Dashboard</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>👶 Crianças</h3>
+                    <p>124 cadastradas</p>
+                </div>
+
+                <div class="card">
+                    <h3>💉 Vacinas Aplicadas</h3>
+                    <p>542 vacinas</p>
+                </div>
+
+                <div class="card">
+                    <h3>⚠️ Vacinas em atraso</h3>
+                    <p>17 crianças</p>
+                </div>
+
+                <div class="card">
+                    <h3>📅 Próximas Vacinas</h3>
+                    <p>23 esta semana</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- VACINAS -->
+
+        <section id="vacinas" class="vacinas">
+
+            <h2 class="title">Vacinas Importantes</h2>
+
+            <div class="vacina-grid">
+
+                <div class="vacina-card">
+
+                    <img
+                        src="img/foto1.png" />
+
+                    <div class="vacina-info">
+
+                        <h3>BCG</h3>
+
+                        <p>
+                            <strong>Serve para:</strong>
+                            proteger contra formas graves de tuberculose.
+                        </p>
+
+                        <p>
+                            <strong>Cuidados:</strong>
+                            manter o local limpo e evitar coçar.
+                        </p>
+
+                        <p>
+                            <strong>Perigos:</strong>
+                            risco de doenças pulmonares graves.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="vacina-card">
+
+                    <img
+                        src="img/polio.png" />
+
+                    <div class="vacina-info">
+
+                        <h3>Poliomielite</h3>
+
+                        <p>
+                            <strong>Serve para:</strong>
+                            prevenir paralisia infantil.
+                        </p>
+
+                        <p>
+                            <strong>Cuidados:</strong>
+                            hidratação e observação de febre.
+                        </p>
+
+                        <p>
+                            <strong>Perigos:</strong>
+                            paralisia permanente.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="vacina-card">
+
+                    <img
+                        src="img/foto3.png" />
+
+                    <div class="vacina-info">
+
+                        <h3>Sarampo</h3>
+
+                        <p>
+                            <strong>Serve para:</strong>
+                            prevenir infecções graves.
+                        </p>
+
+                        <p>
+                            <strong>Cuidados:</strong>
+                            observar febre e dar líquidos.
+                        </p>
+
+                        <p>
+                            <strong>Perigos:</strong>
+                            pneumonia e morte infantil.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTIFICAÇÕES -->
+
+        <section id="notificacoes" class="notificacoes">
+
+            <h2 class="title">Notificações</h2>
+
+            <div class="alerta">
+                ⚠️ João deve tomar a vacina Pentavalente amanhã.
+            </div>
+
+            <div class="alerta">
+                ⚠️ Maria está com vacina em atraso há 5 dias.
+            </div>
+
+            <div class="alerta">
+                ⚠️ Pedro precisa tomar vacina contra sarampo esta semana.
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+            <p>
+                Vacina-Infantil © 2026 - Sistema de Vacinação Infantil
+            </p>
+        </footer>
+
+    </div>
+
+
+</body>
+
+</html>

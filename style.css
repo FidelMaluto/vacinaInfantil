@@ -1,0 +1,293 @@
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BODY */
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.hidden {
+    display: none;
+}
+
+/* LOGIN */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #0f172a, #1d4ed8);
+    padding: 20px;
+}
+
+.login-box {
+    background: white;
+    width: 400px;
+    max-width: 100%;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+    animation: subir 1s ease;
+}
+
+@keyframes subir {
+
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.logo {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+.login-box h1 {
+    color: #1d4ed8;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    outline: none;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+    margin-top: 10px;
+}
+
+.login-box button:hover {
+    background: #1e40af;
+}
+
+/* NAVBAR */
+
+nav {
+    background: #0f172a;
+    color: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 50px 8%;
+    background: linear-gradient(to right, #0f172a, #1e3a8a);
+    color: white;
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-text h1 {
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.hero-text button {
+    padding: 15px 30px;
+    border: none;
+    background: #38bdf8;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.hero img {
+    width: 400px;
+    max-width: 100%;
+}
+
+/* DASHBOARD */
+
+.dashboard,
+.vacinas,
+.notificacoes {
+    padding: 80px 8%;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1e3a8a;
+    font-size: 35px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+/* VACINAS */
+
+.vacinas {
+    background: #e2e8f0;
+}
+
+.vacina-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.vacina-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .08);
+}
+
+.vacina-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.vacina-info {
+    padding: 20px;
+}
+
+.vacina-info h3 {
+    color: #1d4ed8;
+    margin-bottom: 10px;
+}
+
+.vacina-info p {
+    margin: 10px 0;
+    line-height: 1.7;
+}
+
+/* ALERTAS */
+
+.alerta {
+    background: #fef3c7;
+    border-left: 8px solid #f59e0b;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.02);
+    }
+
+}
+
+/* FOOTER */
+
+footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:768px) {
+
+    nav {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-text h1 {
+        font-size: 40px;
+    }
+
+}
