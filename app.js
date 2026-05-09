@@ -8,7 +8,7 @@ function entrar(){
     alert('Preencha todos os campos!');
 
     return;
-  }
+  };
 
   document.getElementById('loginPage').style.display = 'none';
 
@@ -16,4 +16,4 @@ function entrar(){
 
   alert('Login realizado com sucesso!');
 
-}
+};
