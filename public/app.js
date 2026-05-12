@@ -1,236 +1,192 @@
-// =========================================
 // URL DA API
-// =========================================
-
 const API = 'http://localhost:3000';
 
 
 // =========================================
 // LOGIN
 // =========================================
-
 async function entrar() {
 
-    const email = document.getElementById('email').value;
+  const email = document.getElementById('email').value;
+  const senha = document.getElementById('senha').value;
 
-    const senha = document.getElementById('senha').value;
+  if (!email || !senha) {
+    alert('Preencha todos os campos');
+    return;
+  }
 
-    if (!email || !senha) {
+  try {
 
-        alert('Preencha todos os campos');
+    const response = await fetch(`${API}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, senha })
+    });
 
-        return;
+    const resultado = await response.json();
 
+    if (resultado.erro) {
+      alert(resultado.erro);
+      return;
     }
 
-    try {
+    alert(resultado.mensagem);
 
-        const response = await fetch(`${API}/login`, {
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('sistema').classList.remove('hidden');
 
-            method: 'POST',
+    listarVacinas();
+    listarCriancas();
+    carregarDashboard();
 
-            headers: {
-
-                'Content-Type': 'application/json'
-
-            },
-
-            body: JSON.stringify({
-
-                email,
-                senha
-
-            })
-
-        });
-
-        const resultado = await response.json();
-
-        if (resultado.erro) {
-
-            alert(resultado.erro);
-
-            return;
-
-        }
-
-        alert(resultado.mensagem);
-
-        document
-            .getElementById('loginPage')
-            .classList
-            .add('hidden');
-
-        document
-            .getElementById('sistema')
-            .classList
-            .remove('hidden');
-
-        listarVacinas();
-
-        listarCriancas();
-
-        carregarDashboard();
-
-    } catch (erro) {
-
-        console.log(erro);
-
-        alert('Erro ao fazer login');
-
-    }
-
+  } catch (erro) {
+    console.log(erro);
+    alert('Erro ao fazer login');
+  }
 }
 
 
 // =========================================
-// CADASTRAR USUÁRIO
+// CADASTRAR VACINA (UPLOAD)
 // =========================================
+async function cadastrarVacina() {
 
+  const imagemFile = document.getElementById('imagemVacina').files[0];
+
+  const formData = new FormData();
+
+  formData.append('nome', document.getElementById('nomeVacina').value);
+  formData.append('descricao', document.getElementById('descricaoVacina').value);
+  formData.append('idade_recomendada', document.getElementById('idadeVacina').value);
+  formData.append('cuidados', document.getElementById('cuidadosVacina').value);
+
+  if (imagemFile) {
+    formData.append('imagem', imagemFile);
+  }
+
+  try {
+
+    const response = await fetch(`${API}/vacinas`, {
+      method: 'POST',
+      body: formData
+    });
+
+    const resultado = await response.json();
+
+    alert(resultado.mensagem || 'Vacina cadastrada');
+
+    listarVacinas();
+
+  } catch (erro) {
+    console.log(erro);
+    alert('Erro ao cadastrar vacina');
+  }
+}
+
+
+// =========================================
+// CADASTRAR USUÁRIO (CORRIGIDO)
+// =========================================
 async function cadastrarUsuario() {
 
-    const dados = {
+  const dados = {
 
-        nome: document.getElementById('nome').value,
+    nome: document.getElementById('nome').value,
+    email: document.getElementById('emailCadastro').value,
+    telefone: document.getElementById('telefone').value,
+    senha: document.getElementById('senhaCadastro').value,
+    tipo: 'pai'
 
-        email: document.getElementById('emailCadastro').value,
+  };
 
-        telefone: document.getElementById('telefone').value,
+  try {
 
-        senha: document.getElementById('senhaCadastro').value,
+    const response = await fetch(`${API}/usuarios`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
 
-        tipo: 'pai'
+    const resultado = await response.json();
 
-    };
+    alert(resultado.mensagem);
 
-    try {
-
-        const response = await fetch(`${API}/usuarios`, {
-
-            method: 'POST',
-
-            headers: {
-
-                'Content-Type': 'application/json'
-
-            },
-
-            body: JSON.stringify(dados)
-
-        });
-
-        const resultado = await response.json();
-
-        alert(resultado.mensagem);
-
-    } catch (erro) {
-
-        console.log(erro);
-
-        alert('Erro ao cadastrar usuário');
-
-    }
-
+  } catch (erro) {
+    console.log(erro);
+    alert('Erro ao cadastrar usuário');
+  }
 }
 
 
 // =========================================
 // CADASTRAR CRIANÇA
 // =========================================
-
 async function cadastrarCrianca() {
 
-    const dados = {
+  const dados = {
 
-        usuario_id: document.getElementById('usuario_id').value,
+    usuario_id: document.getElementById('usuario_id').value,
+    nome: document.getElementById('nomeCrianca').value,
+    nascimento: document.getElementById('nascimento').value,
+    sexo: document.getElementById('sexo').value
 
-        nome: document.getElementById('nomeCrianca').value,
+  };
 
-        nascimento: document.getElementById('nascimento').value,
+  try {
 
-        sexo: document.getElementById('sexo').value
+    const response = await fetch(`${API}/criancas`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
 
-    };
+    const resultado = await response.json();
 
-    try {
+    alert(resultado.mensagem);
 
-        const response = await fetch(`${API}/criancas`, {
+    listarCriancas();
+    carregarDashboard();
 
-            method: 'POST',
-
-            headers: {
-
-                'Content-Type': 'application/json'
-
-            },
-
-            body: JSON.stringify(dados)
-
-        });
-
-        const resultado = await response.json();
-
-        alert(resultado.mensagem);
-
-        listarCriancas();
-
-        carregarDashboard();
-
-    } catch (erro) {
-
-        console.log(erro);
-
-        alert('Erro ao cadastrar criança');
-
-    }
-
+  } catch (erro) {
+    console.log(erro);
+    alert('Erro ao cadastrar criança');
+  }
 }
 
 
 // =========================================
-// LISTAR VACINAS
+// LISTAR VACINAS (CORRIGIDO IMAGEM)
 // =========================================
-
 async function listarVacinas() {
 
-    try {
+  try {
 
-        const response = await fetch(`${API}/vacinas`);
+    const response = await fetch(`${API}/vacinas`);
+    const vacinas = await response.json();
 
-        const vacinas = await response.json();
+    const container = document.getElementById('listaVacinas');
 
-        const container =
-            document.getElementById('listaVacinas');
+    container.innerHTML = '';
 
-        container.innerHTML = '';
+    vacinas.forEach(vacina => {
 
-        vacinas.forEach(vacina => {
+      const img = vacina.imagem
+        ? `http://localhost:3000/img/${vacina.imagem}`
+        : 'img/default.png';
 
-            container.innerHTML += `
+      container.innerHTML += `
 
                 <div class="vacina-card">
 
-                    <img src="${vacina.imagem}" width="100%">
+                    <img src="${img}" width="100%">
 
                     <div class="vacina-info">
 
-                        <h3>${vacina.nome}</h3>
+                        <h3>${vacina.nome || ''}</h3>
+                        <p>${vacina.descricao || ''}</p>
 
-                        <p>${vacina.descricao}</p>
-
-                        <p>
-
-                            <strong>Idade:</strong>
-                            ${vacina.idade_recomendada}
-
-                        </p>
-
-                        <p>
-
-                            <strong>Cuidados:</strong>
-                            ${vacina.cuidados}
-
-                        </p>
+                        <p><strong>Idade:</strong> ${vacina.idade_recomendada || ''}</p>
+                        <p><strong>Cuidados:</strong> ${vacina.cuidados || ''}</p>
 
                     </div>
 
@@ -238,206 +194,122 @@ async function listarVacinas() {
 
             `;
 
-        });
+    });
 
-    } catch (erro) {
-
-        console.log(erro);
-
-    }
-
+  } catch (erro) {
+    console.log(erro);
+  }
 }
 
 
 // =========================================
-// LISTAR CRIANÇAS
+// LISTAR CRIANÇAS (PROTEÇÃO UNDEFINED)
 // =========================================
-
 async function listarCriancas() {
 
-    try {
+  try {
 
-        const response = await fetch(`${API}/criancas`);
+    const response = await fetch(`${API}/criancas`);
+    const criancas = await response.json();
 
-        const criancas = await response.json();
+    const container = document.getElementById('listaCriancas');
 
-        const container =
-            document.getElementById('listaCriancas');
+    container.innerHTML = '';
 
-        container.innerHTML = '';
+    criancas.forEach(crianca => {
 
-        criancas.forEach(crianca => {
-
-            container.innerHTML += `
+      container.innerHTML += `
 
                 <div class="card">
 
-                    <h3>
-                        👶 ${crianca.nome}
-                    </h3>
+                    <h3>👶 ${crianca.nome || ''}</h3>
 
-                    <p>
-
-                        Responsável:
-                        ${crianca.responsavel}
-
-                    </p>
-
-                    <p>
-
-                        Sexo:
-                        ${crianca.sexo}
-
-                    </p>
-
-                    <p>
-
-                        Nascimento:
-                        ${crianca.nascimento}
-
-                    </p>
+                    <p>Responsável: ${crianca.responsavel || ''}</p>
+                    <p>Sexo: ${crianca.sexo || ''}</p>
+                    <p>Nascimento: ${crianca.nascimento || ''}</p>
 
                 </div>
 
             `;
 
-        });
+    });
 
-    } catch (erro) {
-
-        console.log(erro);
-
-    }
-
+  } catch (erro) {
+    console.log(erro);
+  }
 }
 
 
 // =========================================
-// DASHBOARD
+// DASHBOARD (PROTEGIDO)
 // =========================================
-
 async function carregarDashboard() {
 
-    try {
+  try {
 
-        const responseCriancas =
-            await fetch(`${API}/criancas`);
+    const criancasRes = await fetch(`${API}/criancas`);
+    const criancas = await criancasRes.json();
 
-        const criancas =
-            await responseCriancas.json();
+    document.getElementById('totalCriancas').innerText = criancas.length || 0;
 
-        document.getElementById('totalCriancas')
-            .innerText = criancas.length;
+    const vacRes = await fetch(`${API}/vacinacoes`);
+    const vacinacoes = await vacRes.json();
 
+    document.getElementById('totalVacinas').innerText = vacinacoes.length || 0;
 
-        const responseVacinas =
-            await fetch(`${API}/vacinacoes`);
+    const atrasadas = vacinacoes.filter(v => v.status === 'Atrasada');
+    document.getElementById('vacinasAtrasadas').innerText = atrasadas.length || 0;
 
-        const vacinacoes =
-            await responseVacinas.json();
+    const hoje = new Date();
 
-        document.getElementById('totalVacinas')
-            .innerText = vacinacoes.length;
+    const proximas = vacinacoes.filter(v => {
 
+      if (!v.proxima_dose) return false;
 
-        const atrasadas = vacinacoes.filter(v =>
-            v.status === 'Atrasada'
-        );
+      const data = new Date(v.proxima_dose);
+      const diff = (data - hoje) / (1000 * 60 * 60 * 24);
 
-        document.getElementById('vacinasAtrasadas')
-            .innerText = atrasadas.length;
+      return diff >= 0 && diff <= 7;
 
+    });
 
-        const hoje = new Date();
+    document.getElementById('proximasVacinas').innerText = proximas.length || 0;
 
-        const proximas = vacinacoes.filter(v => {
-
-            if (!v.proxima_dose)
-                return false;
-
-            const data =
-                new Date(v.proxima_dose);
-
-            const diferenca =
-                (data - hoje) /
-                (1000 * 60 * 60 * 24);
-
-            return diferenca >= 0 &&
-                diferenca <= 7;
-
-        });
-
-        document.getElementById('proximasVacinas')
-            .innerText = proximas.length;
-
-    } catch (erro) {
-
-        console.log(erro);
-
-    }
-
+  } catch (erro) {
+    console.log(erro);
+  }
 }
 
 
 // =========================================
 // ENVIAR EMAIL
 // =========================================
-
 async function enviarEmail() {
 
-    const dados = {
+  const dados = {
 
-        email:
-            document.getElementById(
-                'emailResponsavel'
-            ).value,
+    email: document.getElementById('emailResponsavel').value,
+    nomeCrianca: document.getElementById('nomeCriancaEmail').value,
+    vacina: document.getElementById('vacinaEmail').value,
+    data: document.getElementById('dataVacina').value
 
-        nomeCrianca:
-            document.getElementById(
-                'nomeCriancaEmail'
-            ).value,
+  };
 
-        vacina:
-            document.getElementById(
-                'vacinaEmail'
-            ).value,
+  try {
 
-        data:
-            document.getElementById(
-                'dataVacina'
-            ).value
+    const response = await fetch(`${API}/enviar-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
 
-    };
+    const resultado = await response.json();
 
-    try {
+    alert(resultado.mensagem);
 
-        const response =
-            await fetch(`${API}/enviar-email`, {
-
-                method: 'POST',
-
-                headers: {
-
-                    'Content-Type':
-                        'application/json'
-
-                },
-
-                body: JSON.stringify(dados)
-
-            });
-
-        const resultado =
-            await response.json();
-
-        alert(resultado.mensagem);
-
-    } catch (erro) {
-
-        console.log(erro);
-
-        alert('Erro ao enviar email');
-
-    }
+  } catch (erro) {
+    console.log(erro);
+    alert('Erro ao enviar email');
+  }
 
 }
