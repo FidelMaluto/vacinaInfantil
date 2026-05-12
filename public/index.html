@@ -118,8 +118,7 @@
 
                 <div class="vacina-card">
 
-                    <img
-                        src="img/foto1.png" />
+                    <img src="img/foto1.png" />
 
                     <div class="vacina-info">
 
@@ -146,8 +145,7 @@
 
                 <div class="vacina-card">
 
-                    <img
-                        src="img/polio.png" />
+                    <img src="img/polio.png" />
 
                     <div class="vacina-info">
 
@@ -174,8 +172,7 @@
 
                 <div class="vacina-card">
 
-                    <img
-                        src="img/foto3.png" />
+                    <img src="img/foto3.png" />
 
                     <div class="vacina-info">
 
@@ -220,6 +217,96 @@
 
             <div class="alerta">
                 ⚠️ Maluto precisa tomar vacina contra sarampo esta semana.
+            </div>
+
+        </section>
+
+        <!-- FORMULÁRIOS -->
+
+        <section class="dashboard">
+
+            <h2 class="title">
+                Cadastro de Responsável
+            </h2>
+
+            <div class="login-box">
+
+                <input type="text" id="nome" placeholder="Nome do responsável">
+
+                <input type="email" id="emailCadastro" placeholder="Email">
+
+                <input type="text" id="telefone" placeholder="Telefone">
+
+                <input type="password" id="senhaCadastro" placeholder="Senha">
+
+                <button onclick="cadastrarUsuario()">
+                    Cadastrar Responsável
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="dashboard">
+
+            <h2 class="title">
+                Cadastro da Criança
+            </h2>
+
+            <div class="login-box">
+
+                <input type="number" id="usuario_id" placeholder="ID do responsável">
+
+                <input type="text" id="nomeCrianca" placeholder="Nome da criança">
+
+                <input type="date" id="nascimento">
+
+                <select id="sexo">
+
+                    <option value="">
+                        Sexo
+                    </option>
+
+                    <option value="Masculino">
+                        Masculino
+                    </option>
+
+                    <option value="Feminino">
+                        Feminino
+                    </option>
+
+                </select>
+
+                <button onclick="cadastrarCrianca()">
+                    Cadastrar Criança
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="dashboard">
+
+            <h2 class="title">
+                Enviar Notificação
+            </h2>
+
+            <div class="login-box">
+
+                <input type="email" id="emailResponsavel" placeholder="Email do responsável">
+
+                <input type="text" id="nomeCriancaEmail" placeholder="Nome da criança">
+
+                <input type="text" id="vacinaEmail" placeholder="Nome da vacina">
+
+                <input type="date" id="dataVacina">
+
+                <button onclick="enviarEmail()">
+                    Enviar Email
+                </button>
+
             </div>
 
         </section>
