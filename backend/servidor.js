@@ -5,17 +5,17 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const path = require('path');
+
 
 const app = express();
 
 // CONFIGURAÇÕES
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
-
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 // CONEXÃO COM MYSQL
 
@@ -128,6 +128,25 @@ app.post('/vacinacoes', (req, res) => {
         });
 });
 
+// LISTAR VACINAÇÕES
+
+app.get('/vacinacoes', (req, res) => {
+    const sql = `SELECT * FROM vacinacoes`;
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                erro: 'Erro ao buscar vacinações'
+            });
+        }
+
+        res.json(results);
+
+    });
+
+});
+
 // ENVIAR NOTIFICAÇÃO POR EMAIL
 
 app.post('/enviar-email', (req, res) => {
@@ -201,6 +220,49 @@ app.get('/criancas', (req, res) => {
         res.json(results);
 
     });
+});
+
+// LOGIN
+
+app.post('/login', (req, res) => {
+
+    const { email, senha } = req.body;
+
+    const sql = `
+        SELECT * FROM usuarios
+        WHERE email = ? AND senha = ?
+    `;
+
+    db.query(sql, [email, senha], (err, results) => {
+
+        if (err) {
+
+            return res.status(500).json({
+
+                erro: 'Erro no servidor'
+
+            });
+
+        }
+
+        if (results.length === 0) {
+
+            return res.json({
+
+                erro: 'Email ou senha inválidos'
+
+            });
+
+        }
+
+        res.json({
+
+            mensagem: 'Login OK'
+
+        });
+
+    });
+
 });
 
 // SERVIDOR

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vacina-Infantil</title>
     <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    
 </head>
 
 <body>
@@ -44,13 +44,33 @@
         <!-- NAVBAR -->
 
         <nav>
-            <h2>💉 Vacina-Infantil</h2>
+
+            <h2>
+                💉 Vacina-Infantil
+            </h2>
 
             <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#vacinas">Vacinas</a></li>
-                <li><a href="#notificacoes">Notificações</a></li>
+
+                <li>
+                    <a href="#dashboard">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#vacinas">
+                        Vacinas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#notificacoes">
+                        Notificações
+                    </a>
+                </li>
+
             </ul>
+
         </nav>
 
         <!-- HERO -->
@@ -58,18 +78,20 @@
         <section class="hero">
 
             <div class="hero-text">
+
                 <h1>
                     Proteja o Futuro das Crianças!
                 </h1>
 
                 <p>
-                    Plataforma inteligente para acompanhamento de vacinação
-                    infantil dos 0 aos 5 anos.
+                    Plataforma inteligente para acompanhamento
+                    de vacinação infantil dos 0 aos 5 anos.
                 </p>
 
                 <button>
                     Ver Calendário Vacinal
                 </button>
+
             </div>
 
             <img src="img/principal.png">
@@ -80,28 +102,58 @@
 
         <section id="dashboard" class="dashboard">
 
-            <h2 class="title">Dashboard</h2>
+            <h2 class="title">
+                Dashboard
+            </h2>
 
             <div class="cards">
 
                 <div class="card">
-                    <h3>👶 Crianças</h3>
-                    <p>124 cadastradas</p>
+
+                    <h3>
+                        👶 Crianças
+                    </h3>
+
+                    <p id="totalCriancas">
+                        0
+                    </p>
+
                 </div>
 
                 <div class="card">
-                    <h3>💉 Vacinas Aplicadas</h3>
-                    <p>542 vacinas</p>
+
+                    <h3>
+                        💉 Vacinas Aplicadas
+                    </h3>
+
+                    <p id="totalVacinas">
+                        0
+                    </p>
+
                 </div>
 
                 <div class="card">
-                    <h3>⚠️ Vacinas em atraso</h3>
-                    <p>17 crianças</p>
+
+                    <h3>
+                        ⚠️ Vacinas em atraso
+                    </h3>
+
+                    <p id="vacinasAtrasadas">
+                        0
+                    </p>
+
                 </div>
 
                 <div class="card">
-                    <h3>📅 Próximas Vacinas</h3>
-                    <p>23 esta semana</p>
+
+                    <h3>
+                        📅 Próximas Vacinas
+                    </h3>
+
+                    <p id="proximasVacinas">
+                        0
+                    </p>
+
                 </div>
 
             </div>
@@ -112,92 +164,11 @@
 
         <section id="vacinas" class="vacinas">
 
-            <h2 class="title">Vacinas Importantes</h2>
+            <h2 class="title">
+                Vacinas Importantes
+            </h2>
 
-            <div class="vacina-grid">
-
-                <div class="vacina-card">
-
-                    <img src="img/foto1.png" />
-
-                    <div class="vacina-info">
-
-                        <h3>BCG</h3>
-
-                        <p>
-                            <strong>Serve para:</strong>
-                            proteger contra formas graves de tuberculose.
-                        </p>
-
-                        <p>
-                            <strong>Cuidados:</strong>
-                            manter o local limpo e evitar coçar.
-                        </p>
-
-                        <p>
-                            <strong>Perigos:</strong>
-                            risco de doenças pulmonares graves.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="vacina-card">
-
-                    <img src="img/polio.png" />
-
-                    <div class="vacina-info">
-
-                        <h3>Poliomielite</h3>
-
-                        <p>
-                            <strong>Serve para:</strong>
-                            prevenir paralisia infantil.
-                        </p>
-
-                        <p>
-                            <strong>Cuidados:</strong>
-                            hidratação e observação de febre.
-                        </p>
-
-                        <p>
-                            <strong>Perigos:</strong>
-                            paralisia permanente.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="vacina-card">
-
-                    <img src="img/foto3.png" />
-
-                    <div class="vacina-info">
-
-                        <h3>Sarampo</h3>
-
-                        <p>
-                            <strong>Serve para:</strong>
-                            prevenir infecções graves.
-                        </p>
-
-                        <p>
-                            <strong>Cuidados:</strong>
-                            observar febre e dar líquidos.
-                        </p>
-
-                        <p>
-                            <strong>Perigos:</strong>
-                            pneumonia e morte infantil.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
+            <div class="vacina-grid" id="listaVacinas"></div>
 
         </section>
 
@@ -205,7 +176,9 @@
 
         <section id="notificacoes" class="notificacoes">
 
-            <h2 class="title">Notificações</h2>
+            <h2 class="title">
+                Notificações
+            </h2>
 
             <div class="alerta">
                 ⚠️ Fidel deve tomar a vacina Pentavalente amanhã.
@@ -221,7 +194,7 @@
 
         </section>
 
-        <!-- FORMULÁRIOS -->
+        <!-- CADASTRO RESPONSÁVEL -->
 
         <section class="dashboard">
 
@@ -247,6 +220,19 @@
 
         </section>
 
+        <!-- LISTA CRIANÇAS -->
+
+        <section class="dashboard">
+
+            <h2 class="title">
+                Crianças Cadastradas
+            </h2>
+
+            <div class="cards" id="listaCriancas"></div>
+
+        </section>
+
+        <!-- CADASTRO CRIANÇA -->
 
         <section class="dashboard">
 
@@ -286,6 +272,7 @@
 
         </section>
 
+        <!-- EMAIL -->
 
         <section class="dashboard">
 
@@ -314,14 +301,128 @@
         <!-- FOOTER -->
 
         <footer>
+
             <p>
-                Vacina-Infantil © 2026 - Sistema de Vacinação Infantil.
+
+                Vacina-Infantil © 2026
                 <br>
+
                 Todos os direitos reservados.
+
             </p>
+
         </footer>
 
     </div>
+
+    <!-- SCRIPT -->
+
+    <script src="app.js"></script>
+
+    <script>
+
+window.onload = () => {
+
+    const logado = localStorage.getItem('logado');
+
+    if (logado === 'true') {
+
+        mostrarSistema();
+
+    }
+
+};
+
+
+// =========================================
+// LOGIN
+// =========================================
+
+async function entrar() {
+
+    const email =
+        document.getElementById('email').value;
+
+    const senha =
+        document.getElementById('senha').value;
+
+    if (!email || !senha) {
+
+        alert('Preencha os campos');
+
+        return;
+
+    }
+
+    try {
+
+        const response = await fetch('http://localhost:3000/login', {
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+            },
+
+            body: JSON.stringify({
+
+                email,
+                senha
+
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (data.erro) {
+
+            alert(data.erro);
+
+            return;
+
+        }
+
+        localStorage.setItem('logado', 'true');
+
+        mostrarSistema();
+
+    } catch (erro) {
+
+        console.log(erro);
+
+        alert('Erro ao fazer login');
+
+    }
+
+}
+
+
+// =========================================
+// MOSTRAR SISTEMA
+// =========================================
+
+function mostrarSistema() {
+
+    document
+        .getElementById('loginPage')
+        .style.display = 'none';
+
+    document
+        .getElementById('sistema')
+        .style.display = 'block';
+
+    listarVacinas();
+
+    listarCriancas();
+
+    carregarDashboard();
+
+}
+
+</script>
 
 </body>
 
