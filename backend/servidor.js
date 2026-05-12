@@ -11,8 +11,7 @@ const path = require('path');
 const app = express();
 
 // CONFIGURAÇÕES
-
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,6 +44,10 @@ const transporter = nodemailer.createTransport({
 });
 
 // ROTA TESTE
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 app.get('/', (req, res) => {
     res.send('🚀 API Vacina-Infantil funcionando!');
@@ -114,7 +117,7 @@ app.post('/vacinacoes', (req, res) => {
 
     const sql = `INSERT INTO vacinacoes(crianca_id, vacina_id, data_aplicacao, proxima_dose,status) VALUES (?, ?, ?, ?, ?)`;
 
-    db.query(sql,[crianca_id,vacina_id,data_aplicacao,proxima_dose,'Tomada'],
+    db.query(sql, [crianca_id, vacina_id, data_aplicacao, proxima_dose, 'Tomada'],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -123,7 +126,7 @@ app.post('/vacinacoes', (req, res) => {
                 });
             }
 
-            res.json({mensagem: '💉 Vacinação registrada!'});
+            res.json({ mensagem: '💉 Vacinação registrada!' });
 
         });
 });
@@ -150,7 +153,7 @@ app.get('/vacinacoes', (req, res) => {
 // ENVIAR NOTIFICAÇÃO POR EMAIL
 
 app.post('/enviar-email', (req, res) => {
-    const {email,nomeCrianca,vacina,data} = req.body;
+    const { email, nomeCrianca, vacina, data } = req.body;
 
     const mailOptions = {
         from: 'SEUEMAIL@gmail.com',
@@ -197,7 +200,7 @@ app.post('/enviar-email', (req, res) => {
 
         }
 
-        res.json({mensagem: '📧 Email enviado com sucesso!'});
+        res.json({ mensagem: '📧 Email enviado com sucesso!' });
     });
 });
 
