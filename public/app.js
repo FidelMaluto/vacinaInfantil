@@ -1,13 +1,10 @@
-// =========================================
+
 // URL API
-// =========================================
 
 const API = 'http://localhost:3000';
 
 
-// =========================================
 // AUTO LOGIN
-// =========================================
 
 window.onload = () => {
 
@@ -22,9 +19,7 @@ window.onload = () => {
 };
 
 
-// =========================================
 // MOSTRAR SISTEMA
-// =========================================
 
 function mostrarSistema() {
 
@@ -43,9 +38,7 @@ function mostrarSistema() {
 }
 
 
-// =========================================
 // LOGIN
-// =========================================
 
 async function entrar() {
 
@@ -107,9 +100,7 @@ async function entrar() {
 }
 
 
-// =========================================
 // CADASTRAR RESPONSÁVEL
-// =========================================
 
 async function cadastrarUsuario() {
 
@@ -162,9 +153,7 @@ async function cadastrarUsuario() {
 }
 
 
-// =========================================
 // CADASTRAR CRIANÇA
-// =========================================
 
 async function cadastrarCrianca() {
 
@@ -218,94 +207,93 @@ async function cadastrarCrianca() {
 
 }
 
-
-// =========================================
 // CADASTRAR VACINA
-// =========================================
 
 async function cadastrarVacina() {
 
-  const imagem =
-    document.getElementById('imagem').files[0];
+    const imagemFile =
+        document.getElementById('imagem').files[0];
 
-  const formData = new FormData();
+    const formData = new FormData();
 
-  formData.append(
-    'nome',
-    document.getElementById('nomeVacina').value
-  );
+    formData.append(
+        'nome',
+        document.getElementById('nome').value
+    );
 
-  formData.append(
-    'descricao',
-    document.getElementById('descricao').value
-  );
+    formData.append(
+        'descricao',
+        document.getElementById('descricao').value
+    );
 
-  formData.append(
-    'idade_recomendada',
-    document.getElementById('idade').value
-  );
+    formData.append(
+        'idade_recomendada',
+        document.getElementById('idade').value
+    );
 
-  formData.append(
-    'cuidados',
-    document.getElementById('cuidados').value
-  );
+    formData.append(
+        'cuidados',
+        document.getElementById('cuidados').value
+    );
 
-  if (imagem) {
+    if (imagemFile) {
 
-    formData.append('imagem', imagem);
-
-  }
-
-  try {
-
-    const response =
-      await fetch(`${API}/vacinas`, {
-
-        method: 'POST',
-
-        body: formData
-
-      });
-
-    const resultado =
-      await response.json();
-
-    if (resultado.erro) {
-
-      alert(resultado.erro);
-      return;
+        formData.append(
+            'imagem',
+            imagemFile
+        );
 
     }
 
-    alert(resultado.mensagem);
+    try {
 
-    listarVacinas();
+        const response = await fetch(`${API}/vacinas`, {
 
-    carregarDashboard();
+            method: 'POST',
+            body: formData
 
-    document
-      .getElementById('formVacina')
-      .reset();
+        });
 
-  } catch (erro) {
+        // PROTEÇÃO CONTRA HTML
+        const texto = await response.text();
 
-    console.log(erro);
+        let resultado;
 
-    alert('Erro ao cadastrar vacina');
+        try {
 
-  }
+            resultado = JSON.parse(texto);
+
+        } catch {
+
+            console.log(texto);
+
+            alert('O servidor retornou HTML ao invés de JSON');
+
+            return;
+
+        }
+
+        alert(resultado.mensagem);
+
+        document.getElementById('formVacina').reset();
+
+        listarVacinas();
+
+    } catch (erro) {
+
+        console.log(erro);
+
+        alert('Erro ao cadastrar vacina');
+
+    }
 
 }
 
 
-// =========================================
 // LISTAR VACINAS
-// =========================================
 
 async function listarVacinas() {
-
   try {
-
     const response =
       await fetch(`${API}/vacinas`);
 
@@ -358,22 +346,15 @@ async function listarVacinas() {
     });
 
   } catch (erro) {
-
     console.log(erro);
-
   }
 
 }
 
-
-// =========================================
 // LISTAR CRIANÇAS
-// =========================================
 
 async function listarCriancas() {
-
   try {
-
     const response =
       await fetch(`${API}/criancas`);
 
@@ -417,24 +398,16 @@ async function listarCriancas() {
     });
 
   } catch (erro) {
-
     console.log(erro);
-
   }
 
 }
 
-
-// =========================================
 // DASHBOARD
-// =========================================
 
 async function carregarDashboard() {
-
   try {
-
     // CRIANÇAS
-
     const responseCriancas =
       await fetch(`${API}/criancas`);
 
@@ -444,7 +417,6 @@ async function carregarDashboard() {
     document
       .getElementById('totalCriancas')
       .innerText = criancas.length;
-
 
     // VACINAS
 
@@ -457,7 +429,6 @@ async function carregarDashboard() {
     document
       .getElementById('totalVacinas')
       .innerText = vacinas.length;
-
 
     // ATRASADAS
 
@@ -476,14 +447,12 @@ async function carregarDashboard() {
       .getElementById('vacinasAtrasadas')
       .innerText = atrasadas.length;
 
-
     // PRÓXIMAS
 
     const hoje = new Date();
 
     const proximas =
       vacinacoes.filter(v => {
-
         if (!v.proxima_dose)
           return false;
 
@@ -496,7 +465,6 @@ async function carregarDashboard() {
 
         return diferenca >= 0 &&
           diferenca <= 7;
-
       });
 
     document
@@ -504,22 +472,15 @@ async function carregarDashboard() {
       .innerText = proximas.length;
 
   } catch (erro) {
-
     console.log(erro);
-
   }
 
 }
 
-
-// =========================================
 // ENVIAR EMAIL
-// =========================================
 
 async function enviarEmail() {
-
   const dados = {
-
     email:
       document.getElementById('emailResponsavel').value,
 
@@ -547,16 +508,12 @@ async function enviarEmail() {
   }
 
   try {
-
     const response =
       await fetch(`${API}/enviar-email`, {
 
         method: 'POST',
 
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(dados)
 
       });
@@ -568,7 +525,6 @@ async function enviarEmail() {
 
       alert(resultado.erro);
       return;
-
     }
 
     alert(resultado.mensagem);
@@ -583,10 +539,7 @@ async function enviarEmail() {
 
 }
 
-
-// =========================================
 // LOGOUT
-// =========================================
 
 function sair() {
 
@@ -596,10 +549,7 @@ function sair() {
 
 }
 
-
-// =========================================
 // FORM VACINA
-// =========================================
 
 document
   .getElementById('formVacina')
@@ -610,4 +560,3 @@ document
     cadastrarVacina();
 
   });
-  
