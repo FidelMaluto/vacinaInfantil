@@ -34,7 +34,9 @@ function mostrarSistema() {
   listarVacinas();
   listarCriancas();
   carregarDashboard();
-
+  carregarNotificacoes();
+  carregarNotificacoes();
+  
 }
 
 
@@ -208,84 +210,61 @@ async function cadastrarCrianca() {
 }
 
 // CADASTRAR VACINA
-
 async function cadastrarVacina() {
 
-    const imagemFile =
-        document.getElementById('imagem').files[0];
+  const formData = new FormData();
 
-    const formData = new FormData();
+  formData.append(
+    'nome',
+    document.getElementById('nome').value
+  );
 
-    formData.append(
-        'nome',
-        document.getElementById('nome').value
-    );
+  formData.append(
+    'descricao',
+    document.getElementById('descricao').value
+  );
 
-    formData.append(
-        'descricao',
-        document.getElementById('descricao').value
-    );
+  formData.append(
+    'idade_recomendada',
+    document.getElementById('idade').value
+  );
 
-    formData.append(
-        'idade_recomendada',
-        document.getElementById('idade').value
-    );
+  formData.append(
+    'cuidados',
+    document.getElementById('cuidados').value
+  );
 
-    formData.append(
-        'cuidados',
-        document.getElementById('cuidados').value
-    );
+  const imagem =
+    document.getElementById('imagem').files[0];
 
-    if (imagemFile) {
+  if (imagem) {
 
-        formData.append(
-            'imagem',
-            imagemFile
-        );
+    formData.append('imagem', imagem);
 
-    }
+  }
 
-    try {
+  try {
 
-        const response = await fetch(`${API}/vacinas`, {
+    const response = await fetch(`${API}/vacinas`, {
 
-            method: 'POST',
-            body: formData
+      method: 'POST',
+      body: formData
 
-        });
+    });
 
-        // PROTEÇÃO CONTRA HTML
-        const texto = await response.text();
+    const resultado = await response.json();
 
-        let resultado;
+    alert(resultado.mensagem);
 
-        try {
+    listarVacinas();
 
-            resultado = JSON.parse(texto);
+  } catch (erro) {
 
-        } catch {
+    console.log(erro);
 
-            console.log(texto);
+    alert('Erro ao cadastrar vacina');
 
-            alert('O servidor retornou HTML ao invés de JSON');
-
-            return;
-
-        }
-
-        alert(resultado.mensagem);
-
-        document.getElementById('formVacina').reset();
-
-        listarVacinas();
-
-    } catch (erro) {
-
-        console.log(erro);
-
-        alert('Erro ao cadastrar vacina');
-
-    }
+  }
 
 }
 
@@ -513,7 +492,7 @@ async function enviarEmail() {
 
         method: 'POST',
 
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
 
       });
@@ -538,6 +517,100 @@ async function enviarEmail() {
   }
 
 }
+
+// NOTIFICAÇÕES AUTOMÁTICAS
+
+async function carregarNotificacoes() {
+
+  try {
+
+    const response =
+      await fetch(`${API}/vacinacoes`);
+
+    const vacinacoes =
+      await response.json();
+
+    const container =
+      document.getElementById('notificacoes');
+
+    container.innerHTML = `
+
+            <h2 class="title">
+                Notificações
+            </h2>
+
+        `;
+
+    if (vacinacoes.length === 0) {
+
+      container.innerHTML += `
+
+                <div class="alerta">
+                    Nenhuma notificação encontrada.
+                </div>
+
+            `;
+
+      return;
+
+    }
+
+    vacinacoes.forEach(v => {
+
+      let mensagem = '';
+
+      if (
+        v.status &&
+        v.status.toLowerCase() === 'pendente'
+      ) {
+
+        mensagem = `
+                    ⚠️ ${v.crianca}
+                    deve tomar a vacina
+                    ${v.vacina}
+                    em breve.
+                `;
+
+      } else if (
+        v.status &&
+        v.status.toLowerCase() === 'atrasada'
+      ) {
+
+        mensagem = `
+                    ⚠️ ${v.crianca}
+                    está com a vacina
+                    ${v.vacina}
+                    atrasada.
+                `;
+
+      } else {
+
+        mensagem = `
+                    ✅ ${v.crianca}
+                    tomou a vacina
+                    ${v.vacina}.
+                `;
+
+      }
+
+      container.innerHTML += `
+
+                <div class="alerta">
+                    ${mensagem}
+                </div>
+
+            `;
+
+    });
+
+  } catch (erro) {
+
+    console.log(erro);
+
+  }
+
+}
+
 
 // LOGOUT
 

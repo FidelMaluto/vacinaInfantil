@@ -23,10 +23,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 // MYSQL
 // =====================
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Angola@123',
-  database: 'vacinainfantil'
+    host: 'localhost',
+    user: 'root',
+    password: 'Angola@123',
+    database: 'vacinainfantil'
 });
 
 db.connect(() => console.log('DB conectado'));
@@ -35,12 +35,12 @@ db.connect(() => console.log('DB conectado'));
 // MULTER (UPLOAD)
 // =====================
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../public/img'));
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../public/img'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
 });
 
 const upload = multer({ storage });
@@ -49,112 +49,146 @@ const upload = multer({ storage });
 // LOGIN
 // =====================
 app.post('/login', (req, res) => {
-  const { email, senha } = req.body;
+    const { email, senha } = req.body;
 
-  db.query(
-    'SELECT * FROM usuarios WHERE email=? AND senha=?',
-    [email, senha],
-    (err, results) => {
-      if (err) return res.status(500).json({ erro: 'erro servidor' });
+    db.query(
+        'SELECT * FROM usuarios WHERE email=? AND senha=?',
+        [email, senha],
+        (err, results) => {
+            if (err) return res.status(500).json({ erro: 'erro servidor' });
 
-      if (results.length === 0)
-        return res.json({ erro: 'dados inválidos' });
+            if (results.length === 0)
+                return res.json({ erro: 'dados inválidos' });
 
-      res.json({ mensagem: 'OK', usuario: results[0] });
-    }
-  );
+            res.json({ mensagem: 'OK', usuario: results[0] });
+        }
+    );
 });
 
 // =====================
 // VACINAS (LISTAR)
 // =====================
 app.get('/vacinas', (req, res) => {
-  db.query('SELECT * FROM vacinas', (err, results) => {
-    if (err) return res.status(500).json({ erro: err });
-    res.json(results);
-  });
+    db.query('SELECT * FROM vacinas', (err, results) => {
+        if (err) return res.status(500).json({ erro: err });
+        res.json(results);
+    });
 });
 
 // =====================
 // VACINAS (CRIAR + IMAGEM)
 // =====================
 app.post('/vacinas', upload.single('imagem'), (req, res) => {
-  const { nome, descricao, idade_recomendada, cuidados } = req.body;
+    const { nome, descricao, idade_recomendada, cuidados } = req.body;
 
-  const imagem = req.file ? req.file.filename : null;
+    const imagem = req.file ? req.file.filename : null;
 
-  db.query(
-    `INSERT INTO vacinas(nome,descricao,idade_recomendada,cuidados,imagem)
+    db.query(
+        `INSERT INTO vacinas(nome,descricao,idade_recomendada,cuidados,imagem)
      VALUES (?,?,?,?,?)`,
-    [nome, descricao, idade_recomendada, cuidados, imagem],
-    (err) => {
-      if (err) return res.status(500).json({ erro: err });
+        [nome, descricao, idade_recomendada, cuidados, imagem],
+        (err) => {
+            if (err) return res.status(500).json({ erro: err });
 
-      res.json({ mensagem: 'Vacina criada' });
-    }
-  );
+            res.json({ mensagem: 'Vacina criada' });
+        }
+    );
 });
 
 // =====================
 // CRIANÇAS
 // =====================
 app.post('/criancas', (req, res) => {
-  const { usuario_id, nome, nascimento, sexo } = req.body;
+    const { usuario_id, nome, nascimento, sexo } = req.body;
 
-  db.query(
-    `INSERT INTO criancas(usuario_id,nome,nascimento,sexo)
+    db.query(
+        `INSERT INTO criancas(usuario_id,nome,nascimento,sexo)
      VALUES (?,?,?,?)`,
-    [usuario_id, nome, nascimento, sexo],
-    (err) => {
-      if (err) return res.status(500).json({ erro: err });
+        [usuario_id, nome, nascimento, sexo],
+        (err) => {
+            if (err) return res.status(500).json({ erro: err });
 
-      res.json({ mensagem: 'Criança adicionada' });
-    }
-  );
+            res.json({ mensagem: 'Criança adicionada' });
+        }
+    );
 });
 
 app.get('/criancas', (req, res) => {
-  db.query(
-    `SELECT c.*, u.nome AS responsavel
+    db.query(
+        `SELECT c.*, u.nome AS responsavel
      FROM criancas c
      JOIN usuarios u ON c.usuario_id=u.id`,
-    (err, results) => {
-      if (err) return res.status(500).json({ erro: err });
-      res.json(results);
-    }
-  );
+        (err, results) => {
+            if (err) return res.status(500).json({ erro: err });
+            res.json(results);
+        }
+    );
 });
 
-// =====================
+// LISTAR VACINAÇÕES
+
+app.get('/vacinacoes', (req, res) => {
+
+    const sql = `
+        SELECT
+            vacinacoes.*,
+            criancas.nome AS crianca,
+            vacinas.nome AS vacina
+        FROM vacinacoes
+        JOIN criancas
+            ON vacinacoes.crianca_id = criancas.id
+        JOIN vacinas
+            ON vacinacoes.vacina_id = vacinas.id
+        ORDER BY vacinacoes.id DESC
+    `;
+
+    db.query(sql, (err, results) => {
+
+        if (err) {
+
+            console.log(err);
+
+            return res.status(500).json({
+                erro: 'Erro ao buscar vacinações'
+            });
+
+        }
+
+        res.json(results);
+
+    });
+
+});
+
 // EMAIL
-// =====================
+
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'fidel.maluto77@gmail.com',
-    pass: 'd g m t m f u x v p b b s r e f'
-  }
+    service: 'gmail',
+    auth: {
+        user: 'fidel.maluto77@gmail.com',
+        pass: 'd g m t m f u x v p b b s r e f'
+    }
 });
 
 app.post('/enviar-email', async (req, res) => {
-  try {
-    const { email, nomeCrianca, vacina, data } = req.body;
+    try {
+        const { email, nomeCrianca, vacina, data } = req.body;
 
-    await transporter.sendMail({
-      from: 'Vacina',
-      to: email,
-      subject: 'Vacina',
-      html: `
+        await transporter.sendMail({
+            from: 'Vacina',
+            to: email,
+            subject: 'Vacina',
+            html: `
         <h3>Vacinação</h3>
         <p>${nomeCrianca} - ${vacina} - ${data}</p>
       `
-    });
+        });
 
-    res.json({ mensagem: 'Email enviado' });
+        res.json({ mensagem: 'Email enviado' });
 
-  } catch (e) {
-    res.status(500).json({ erro: e.message });
-  }
+    } catch (e) {
+        res.status(500).json({ erro: e.message });
+    }
 });
 
 // =====================

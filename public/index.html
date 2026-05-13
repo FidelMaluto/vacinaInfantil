@@ -163,7 +163,7 @@
 
         <!-- VACINAS -->
 
-        <form id="formVacina">
+        <form id="formVacina" enctype="multipart/form-data">
 
             <input type="text" id="nome" placeholder="Nome">
 
@@ -197,20 +197,9 @@
                 Notificações
             </h2>
 
-            <div class="alerta">
-                ⚠️ Fidel deve tomar a vacina Pentavalente amanhã.
-            </div>
-
-            <div class="alerta">
-                ⚠️ Domingos está com vacina em atraso há 5 dias.
-            </div>
-
-            <div class="alerta">
-                ⚠️ Maluto precisa tomar vacina contra sarampo esta semana.
-            </div>
+            <div id="listaNotificacoes"></div>
 
         </section>
-
         <!-- CADASTRO RESPONSÁVEL -->
 
         <section class="dashboard">
