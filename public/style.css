@@ -57,6 +57,10 @@ body {
     margin-bottom: 20px;
 }
 
+.login-box {
+    margin: 10px auto;
+}
+
 .login-box h1 {
     color: #1d4ed8;
     margin-bottom: 10px;
