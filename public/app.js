@@ -1,8 +1,5 @@
-
 // URL API
-
 const API = 'http://localhost:3000';
-
 
 // AUTO LOGIN
 
@@ -36,7 +33,7 @@ function mostrarSistema() {
   carregarDashboard();
   carregarNotificacoes();
   carregarNotificacoes();
-  
+
 }
 
 
