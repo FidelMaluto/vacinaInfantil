@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const multer = require('multer');
+const app = require('./src/app.js');
 
 const app = express();
 
