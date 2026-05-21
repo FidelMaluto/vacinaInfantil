@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -9,8 +8,9 @@ const multer = require('multer');
 
 const app = express();
 
+// =====================
 // MIDDLEWARE
-
+// =====================
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,20 +19,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/img', express.static(path.join(__dirname, '../public/img')));
 app.use(express.static(path.join(__dirname, '../public')));
 
+// =====================
 // MYSQL
-
+// =====================
 const db = mysql.createConnection({
-    host: process.env.MYSQLHOST,
-    user: process.env.MYSQLUSER,
-    password: process.env.MYSQLPASS,
-    database: process.env.MYSQLDATABASE,
-    port: process.env.MYSQLPORT
+    host: 'localhost',
+    user: 'root',
+    password: 'Angola@123',
+    database: 'vacinainfantil'
 });
 
 db.connect(() => console.log('DB conectado'));
 
+// =====================
 // MULTER (UPLOAD)
-
+// =====================
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path.join(__dirname, '../public/img'));
@@ -44,8 +45,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// =====================
 // LOGIN
-
+// =====================
 app.post('/login', (req, res) => {
     const { email, senha } = req.body;
 
@@ -63,8 +65,9 @@ app.post('/login', (req, res) => {
     );
 });
 
+// =====================
 // VACINAS (LISTAR)
-
+// =====================
 app.get('/vacinas', (req, res) => {
     db.query('SELECT * FROM vacinas', (err, results) => {
         if (err) return res.status(500).json({ erro: err });
@@ -72,8 +75,9 @@ app.get('/vacinas', (req, res) => {
     });
 });
 
+// =====================
 // VACINAS (CRIAR + IMAGEM)
-
+// =====================
 app.post('/vacinas', upload.single('imagem'), (req, res) => {
     const { nome, descricao, idade_recomendada, cuidados } = req.body;
 
@@ -91,8 +95,9 @@ app.post('/vacinas', upload.single('imagem'), (req, res) => {
     );
 });
 
+// =====================
 // CRIANÇAS
-
+// =====================
 app.post('/criancas', (req, res) => {
     const { usuario_id, nome, nascimento, sexo } = req.body;
 
@@ -160,8 +165,8 @@ app.get('/vacinacoes', (req, res) => {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: 'fidel.maluto77@gmail.com',
+        pass: 'd g m t m f u x v p b b s r e f'
     }
 });
 
