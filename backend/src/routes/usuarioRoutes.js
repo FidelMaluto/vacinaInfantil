@@ -1,10 +1,7 @@
 const router = require('express').Router();
 
-const usuarioController =
-require('../controllers/usuarioController');
-
-router.post('/', usuarioController.criar);
-
-router.get('/', usuarioController.listar);
+router.get('/', (req, res) => {
+    res.json({ ok: true, message: "usuarios route OK" });
+});
 
 module.exports = router;
