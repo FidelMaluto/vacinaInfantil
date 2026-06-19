@@ -1,26 +1,17 @@
-
 // URL API
-
 const API = 'http://localhost:3000';
 
-
 // AUTO LOGIN
-
 window.onload = () => {
-
   const logado = localStorage.getItem('logado');
 
   if (logado === 'true') {
-
     mostrarSistema();
-
   }
 
 };
 
-
 // MOSTRAR SISTEMA
-
 function mostrarSistema() {
 
   document
@@ -41,7 +32,6 @@ function mostrarSistema() {
 
 
 // LOGIN
-
 async function entrar() {
 
   const email =
@@ -103,9 +93,7 @@ async function entrar() {
 
 
 // CADASTRAR RESPONSÁVEL
-
 async function cadastrarUsuario() {
-
   const dados = {
 
     nome:
@@ -156,9 +144,7 @@ async function cadastrarUsuario() {
 
 
 // CADASTRAR CRIANÇA
-
 async function cadastrarCrianca() {
-
   const dados = {
 
     usuario_id:
@@ -270,7 +256,6 @@ async function cadastrarVacina() {
 
 
 // LISTAR VACINAS
-
 async function listarVacinas() {
   try {
     const response =
@@ -331,7 +316,6 @@ async function listarVacinas() {
 }
 
 // LISTAR CRIANÇAS
-
 async function listarCriancas() {
   try {
     const response =

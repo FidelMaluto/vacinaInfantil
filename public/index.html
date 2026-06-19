@@ -22,17 +22,13 @@
 
             <h1>Vacina-Infantíl</h1>
 
-            <p>
-                Sistema de Controle de Vacinação Infantil
-            </p>
+            <p>Sistema de Controle de Vacinação Infantil</p>
 
             <input type="email" id="email" placeholder="Digite seu email">
 
             <input type="password" id="senha" placeholder="Digite sua senha">
 
-            <button onclick="entrar()">
-                Entrar no Sistema
-            </button>
+            <button onclick="entrar()">Entrar no Sistema</button>
 
         </div>
 
@@ -46,28 +42,20 @@
 
         <nav>
 
-            <h2>
-                💉 Vacina-Infantil
-            </h2>
+            <h2>💉 Vacina-Infantil</h2>
 
             <ul>
 
                 <li>
-                    <a href="#dashboard">
-                        Dashboard
-                    </a>
+                    <a href="#dashboard">Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="#vacinas">
-                        Vacinas
-                    </a>
+                    <a href="#vacinas">Vacinas</a>
                 </li>
 
                 <li>
-                    <a href="#notificacoes">
-                        Notificações
-                    </a>
+                    <a href="#notificacoes">Notificações</a>
                 </li>
 
             </ul>
@@ -80,18 +68,11 @@
 
             <div class="hero-text">
 
-                <h1>
-                    Proteja o Futuro das Crianças!
-                </h1>
+                <h1>Proteja o Futuro das Crianças!</h1>
 
-                <p>
-                    Plataforma inteligente para acompanhamento
-                    de vacinação infantil dos 0 aos 5 anos.
-                </p>
+                <p>Plataforma inteligente para acompanhamento de vacinação infantil dos 0 aos 5 anos.</p>
 
-                <button>
-                    Ver Calendário Vacinal
-                </button>
+                <button>Ver Calendário Vacinal</button>
 
             </div>
 
@@ -103,57 +84,39 @@
 
         <section id="dashboard" class="dashboard">
 
-            <h2 class="title">
-                Dashboard
-            </h2>
+            <h2 class="title">Dashboard</h2>
 
             <div class="cards">
 
                 <div class="card">
 
-                    <h3>
-                        👶 Crianças
-                    </h3>
+                    <h3>👶 Crianças</h3>
 
-                    <p id="totalCriancas">
-                        0
-                    </p>
+                    <p id="totalCriancas"></p>
 
                 </div>
 
                 <div class="card">
 
-                    <h3>
-                        💉 Vacinas Aplicadas
-                    </h3>
+                    <h3>💉 Vacinas Aplicadas</h3>
 
-                    <p id="totalVacinas">
-                        0
-                    </p>
+                    <p id="totalVacinas">0</p>
 
                 </div>
 
                 <div class="card">
 
-                    <h3>
-                        ⚠️ Vacinas em atraso
-                    </h3>
+                    <h3>⚠️ Vacinas em atraso</h3>
 
-                    <p id="vacinasAtrasadas">
-                        0
-                    </p>
+                    <p id="vacinasAtrasadas">0</p>
 
                 </div>
 
                 <div class="card">
 
-                    <h3>
-                        📅 Próximas Vacinas
-                    </h3>
+                    <h3>📅 Próximas Vacinas</h3>
 
-                    <p id="proximasVacinas">
-                        0
-                    </p>
+                    <p id="proximasVacinas">0</p>
 
                 </div>
 
@@ -163,27 +126,30 @@
 
         <!-- VACINAS -->
 
-        <form id="formVacina" enctype="multipart/form-data">
+        <section>
+            <h2 class="title">Cadastrar Vacina</h2>
 
-            <input type="text" id="nome" placeholder="Nome">
+            <form id="formVacina" enctype="multipart/form-data">
 
-            <textarea id="descricao" placeholder="Descrição"></textarea>
+                <input type="text" id="nome" placeholder="Nome">
 
-            <input type="text" id="idade" placeholder="Idade recomendada">
+                <textarea id="descricao" placeholder="Descrição"></textarea>
 
-            <input type="text" id="cuidados" placeholder="Cuidados">
+                <input type="text" id="idade" placeholder="Idade recomendada">
 
-            <input type="file" id="imagem">
+                <input type="text" id="cuidados" placeholder="Cuidados">
 
-            <button type="submit">Guardar Vacina</button>
+                <input type="file" id="imagem">
 
-        </form>
+                <button type="submit">Guardar Vacina</button>
+
+            </form>
+
+        </section>
 
         <section id="vacinas" class="vacinas">
 
-            <h2 class="title">
-                Vacinas Importantes
-            </h2>
+            <h2 class="title">Vacinas Importantes</h2>
 
             <div class="vacina-grid" id="listaVacinas"></div>
 
@@ -193,20 +159,17 @@
 
         <section id="notificacoes" class="notificacoes">
 
-            <h2 class="title">
-                Notificações
-            </h2>
+            <h2 class="title">Notificações</h2>
 
             <div id="listaNotificacoes"></div>
 
         </section>
+
         <!-- CADASTRO RESPONSÁVEL -->
 
         <section class="dashboard">
 
-            <h2 class="title">
-                Cadastro de Responsável
-            </h2>
+            <h2 class="title">Cadastro de Responsável</h2>
 
             <div class="login-box">
 
@@ -218,9 +181,7 @@
 
                 <input type="password" id="senhaCadastro" placeholder="Senha">
 
-                <button onclick="cadastrarUsuario()">
-                    Cadastrar Responsável
-                </button>
+                <button onclick="cadastrarUsuario()">Cadastrar Responsável</button>
 
             </div>
 
@@ -230,9 +191,7 @@
 
         <section class="dashboard">
 
-            <h2 class="title">
-                Crianças Cadastradas
-            </h2>
+            <h2 class="title">Crianças Cadastradas</h2>
 
             <div class="cards" id="listaCriancas"></div>
 
@@ -242,9 +201,7 @@
 
         <section class="dashboard">
 
-            <h2 class="title">
-                Cadastro da Criança
-            </h2>
+            <h2 class="title">Cadastro da Criança</h2>
 
             <div class="login-box">
 
@@ -256,23 +213,15 @@
 
                 <select id="sexo">
 
-                    <option value="">
-                        Sexo
-                    </option>
+                    <option value="">Sexo</option>
 
-                    <option value="Masculino">
-                        Masculino
-                    </option>
+                    <option value="Masculino">Masculino</option>
 
-                    <option value="Feminino">
-                        Feminino
-                    </option>
+                    <option value="Feminino">Feminino</option>
 
                 </select>
 
-                <button onclick="cadastrarCrianca()">
-                    Cadastrar Criança
-                </button>
+                <button onclick="cadastrarCrianca()">Cadastrar Criança</button>
 
             </div>
 
@@ -282,9 +231,7 @@
 
         <section class="dashboard">
 
-            <h2 class="title">
-                Enviar Notificação
-            </h2>
+            <h2 class="title">Enviar Notificação</h2>
 
             <div class="login-box">
 
@@ -296,9 +243,7 @@
 
                 <input type="date" id="dataVacina">
 
-                <button onclick="enviarEmail()">
-                    Enviar Email
-                </button>
+                <button onclick="enviarEmail()">Enviar Email</button>
 
             </div>
 
@@ -308,14 +253,7 @@
 
         <footer>
 
-            <p>
-
-                Vacina-Infantil © 2026
-                <br>
-
-                Todos os direitos reservados.
-
-            </p>
+            <p>Vacina-Infantil © 2026<br>Todos os direitos reservados.</p>
 
         </footer>
 
